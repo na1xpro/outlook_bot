@@ -42,7 +42,7 @@ dalie()
 knopka_bolshe_ne_pokazivat = driver_login.find_element_by_id("KmsiCheckboxField").click()
 
 knopka_net = driver_login.find_element_by_id("idBtn_Back").click()
-print("------------------------Вход в акаунт прошлёл успешно!------------------------")
+print("------------------------Вход в акаунт прошёл успешно!------------------------")
 
 # Переход на почту  и выбор собщения
 
@@ -91,7 +91,7 @@ print("------------------------Парсинг  собщения прошёл у�
 sleep(4)
 
 for email in mail_list:
-    print("-----------------СозданиЕ Собщения!-----------------")
+    print("-----------------Создание Собщения!-----------------")
     open_message_icon = driver_login.find_element_by_xpath('//span[text()="New message"]').click()
     sleep(5)
     print("-----------------Добавление юзеров!-----------------")
@@ -104,7 +104,7 @@ for email in mail_list:
 
     title_message.send_keys('You need to pass a training')
 
-    print("-----------------СозданиЕ Самого собщения!-----------------")
+    print("-----------------Создание самого собщения!-----------------")
     message_for_users = driver_login.find_element_by_xpath('//div[@aria-label="Message body"]')
     message_for_users.send_keys('Hello! You need to pass trainings. Have a nice day!')
 
