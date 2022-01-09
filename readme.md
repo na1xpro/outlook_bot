@@ -12,12 +12,12 @@ login = *vivexpro@outlook.com*
 password = *Vivexpass1*
 
 
-#Folder for saving messages.
+# Folder for saving messages.
 
 
 folder = **/downloaded_files**
 
-#Bot launch
+# Bot launch
 
 1. *Click on 'outlook_bot.py'*
 2. *Will be enjoyed.*
