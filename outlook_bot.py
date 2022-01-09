@@ -11,7 +11,7 @@ warnings.filterwarnings("ignore") #Отключение варнингов
 driver_path = os.getcwd() + '/webdriver/chromedriver.exe'
 
 options = Options()
-
+options.add_argument('--window-size=1400,800')
 options.add_experimental_option('prefs', {
     'download.default_directory': os.getcwd() + '\downloaded_files',
     'download.prompt_for_download': False,
