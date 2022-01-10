@@ -5,7 +5,7 @@ import os
 from sys import platform
 
 if platform == "linux" or platform == "linux2":
-    driver_path = Service(os.getcwd() + '\webdriver\chromedriver')
+    driver_path = Service(os.getcwd() + '/webdriver/chromedriver')
 
 elif platform == "win32":
     driver_path = Service(os.getcwd() + '\webdriver\chromedriver.exe')
