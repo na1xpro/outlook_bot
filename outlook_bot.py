@@ -24,7 +24,7 @@ password = driver.find_element(By.NAME, "passwd")
 password.send_keys("Vivexpass1")
 sleep(1)
 dalie()
-
+#Тест строка
 knopka_bolshe_ne_pokazivat = driver.find_element(By.ID, "KmsiCheckboxField").click()
 
 knopka_net = driver.find_element(By.ID, "idBtn_Back").click()
