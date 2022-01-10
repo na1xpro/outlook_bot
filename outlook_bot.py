@@ -1,4 +1,3 @@
-
 from time import sleep
 from selenium.webdriver.common.by import By
 import pandas as pd
@@ -6,7 +5,7 @@ import os
 from webdriver.driver import driver
 
 
-print(driver)
+
 driver.get('https://login.live.com/')
 
 # Вход в акаунт
@@ -24,7 +23,7 @@ password = driver.find_element(By.NAME, "passwd")
 password.send_keys("Vivexpass1")
 sleep(1)
 dalie()
-#Тест строка
+# Тест строка
 knopka_bolshe_ne_pokazivat = driver.find_element(By.ID, "KmsiCheckboxField").click()
 
 knopka_net = driver.find_element(By.ID, "idBtn_Back").click()

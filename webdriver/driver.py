@@ -7,15 +7,15 @@ from sys import platform
 
 
 if platform == "linux" or platform == "linux2":
-    way_lin = os.getcwd() + '/webdriver/chromedriver'
-    os.chmod(way_lin, 755)
-    driver_service = Service(way_lin)
+    way = os.getcwd() + '/webdriver/chromedriver'
+    os.chmod(way, 755)
+    driver_service = Service(way)
 
 
 elif platform == "win32":
-    way_win = os.getcwd() + '\chromedriver.exe'
-    os.chmod(way_win, 755)
-    driver_service = Service(way_win)
+    way = os.getcwd() + '\webdriver\chromedriver.exe'
+    os.chmod(way, 755)
+    driver_service = Service(way)
 
 
 options = Options()
