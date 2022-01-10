@@ -2,11 +2,17 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import os
+from sys import platform
+
+if platform == "linux" or platform == "linux2":
+    driver_path = Service(os.getcwd() + '\webdriver\chromedriver')
+
+elif platform == "win32":
+    driver_path = Service(os.getcwd() + '\webdriver\chromedriver.exe')
 
 
 
-
-driver_path = Service(os.getcwd() + '\webdriver\chromedriver.exe')
+# driver_path = Service(os.getcwd() + '\webdriver\chromedriver.exe')
 
 options = Options()
 options.add_argument('--window-size=1400,800')
