@@ -3,7 +3,10 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import os
 
-driver_path = Service(os.getcwd() + '\chromedriver.exe')
+
+
+
+driver_path = Service(os.getcwd() + '\webdriver\chromedriver.exe')
 
 options = Options()
 options.add_argument('--window-size=1400,800')
