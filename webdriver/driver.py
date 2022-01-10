@@ -7,11 +7,15 @@ from sys import platform
 
 
 if platform == "linux" or platform == "linux2":
-    driver_path = Service(os.getcwd() + '/webdriver/chromedriver')
+    way_lin = os.getcwd() + '/webdriver/chromedriver'
+    os.chmod(way_lin, 755)
+    driver_service = Service(way_lin)
+
 
 elif platform == "win32":
-    driver_path = Service(os.getcwd() + '\webdriver\chromedriver.exe')
-
+    way_win = os.getcwd() + '\chromedriver.exe'
+    os.chmod(way_win, 755)
+    driver_service = Service(way_win)
 
 
 options = Options()
@@ -23,5 +27,4 @@ options.add_experimental_option('prefs', {
     'download.directory_upgrade': True,
 })
 
-driver = webdriver.Chrome(service=driver_path, options=options)
-print('path:', os.getcwd())
+driver = webdriver.Chrome(service=driver_service, options=options)

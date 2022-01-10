@@ -6,7 +6,7 @@ import os
 from webdriver.driver import driver
 
 
-
+print(driver)
 driver.get('https://login.live.com/')
 
 # Вход в акаунт
