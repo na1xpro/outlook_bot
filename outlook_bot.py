@@ -7,7 +7,6 @@ from selenium.webdriver.common.by import By
 from webdriver.driver import driver
 from constants import credentials
 
-
 driver.get('https://login.live.com/')
 
 # Вход в акаунт
