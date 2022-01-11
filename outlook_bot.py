@@ -97,4 +97,3 @@ for email in mail_list:
 sleep(5)
 driver.close()
 driver.quit()
-x = 888
