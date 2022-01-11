@@ -1,10 +1,13 @@
-from time import sleep
-from selenium.webdriver.common.by import By
-import pandas as pd
 import os
+from time import sleep
+
+import pandas as pd
+
+
+from selenium.webdriver.common.by import By
+
+
 from webdriver.driver import driver
-
-
 
 
 driver.get('https://login.live.com/')
@@ -15,7 +18,7 @@ email.send_keys("vivexpro@outlook.com")
 
 
 def dalie():
-    knopka_dalie = driver.find_element(By.ID, "idSIButton9").click()
+    driver.find_element(By.ID, "idSIButton9").click()
 
 
 dalie()
@@ -25,9 +28,9 @@ password.send_keys("Vivexpass1")
 sleep(1)
 dalie()
 # Тест строка
-knopka_bolshe_ne_pokazivat = driver.find_element(By.ID, "KmsiCheckboxField").click()
+driver.find_element(By.ID, "KmsiCheckboxField").click()
 
-knopka_net = driver.find_element(By.ID, "idBtn_Back").click()
+driver.find_element(By.ID, "idBtn_Back").click()
 print("------------------------Вход в акаунт прошёл успешно!------------------------")
 
 # Переход на почту  и выбор собщения
@@ -40,23 +43,23 @@ def download_button():  # Скачка собщения
     sleep(5)
 
     print("Скачка собщения----------")
-    download_message = driver.find_element(By.XPATH, '//button[@name = "Download"]').click()
+    driver.find_element(By.XPATH, '//button[@name = "Download"]').click()
     print("------------------------Скачивание  собщения прошло успешно!------------------------")
-    close_form_download = driver.find_element(By.XPATH, '//button[@title = "Close" ]').click()
+    driver.find_element(By.XPATH, '//button[@title = "Close" ]').click()
 
 
-enter_trainingA = driver.find_element(By.XPATH, '//div[@title="Training A"]').click()  # Скачка А
+driver.find_element(By.XPATH, '//div[@title="Training A"]').click()  # Скачка А
 sleep(3)
-enter_message = driver.find_element(By.XPATH, '//div[@title = "Training A.xlsx"]').click()
+driver.find_element(By.XPATH, '//div[@title = "Training A.xlsx"]').click()
 print("------------------------Выбор собщения прошёл успешно!------------------------")
 download_button()
 
-enter_trainingB = driver.find_element(By.XPATH, '//div[@title="Training B"]').click()  # Скачка B
+driver.find_element(By.XPATH, '//div[@title="Training B"]').click()  # Скачка B
 sleep(3)
-enter_message = driver.find_element(By.XPATH, '//div[@title = "Training B.xlsx"]').click()
+driver.find_element(By.XPATH, '//div[@title = "Training B.xlsx"]').click()
 download_button()
 
-enter_trainingC = driver.find_element(By.XPATH, '//div[@title="Training C"]').click()  # Скачка C
+driver.find_element(By.XPATH, '//div[@title="Training C"]').click()  # Скачка C
 sleep(3)
 enter_message = driver.find_element(By.XPATH, '//div[@title = "Training C.xlsx"]').click()
 download_button()
@@ -68,7 +71,7 @@ list_bad = []
 for f in [os.getcwd() + '/downloaded_files/Training A.xlsx',
           os.getcwd() + '/downloaded_files/Training B.xlsx',
           os.getcwd() + '/downloaded_files/Training C.xlsx']:
-    data = pd.read_excel(f, )
+    data = pd.read_excel(f)
     mail = data['Mail'].tolist()
     list_bad.extend(mail)
     mail_list = list(set(list_bad))
