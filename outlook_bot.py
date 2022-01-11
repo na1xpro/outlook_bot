@@ -44,7 +44,7 @@ def download_button():  # Скачка собщения
     sleep(5)
 
     print("Скачка собщения----------")
-    driver.find_element(By.XPATH, '//button[@name = "Download"]').click()
+    skachivanie = driver.find_element(By.XPATH, '//button[@name = "Download"]').click()
     print("------------------------Скачивание  собщения прошло успешно!------------------------")
     driver.find_element(By.XPATH, '//button[@title = "Close" ]').click()
 
