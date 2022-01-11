@@ -1,7 +1,9 @@
 import os
 from time import sleep
 import pandas as pd
+
 from selenium.webdriver.common.by import By
+
 from webdriver.driver import driver
 from constants import credentials
 
@@ -10,7 +12,6 @@ driver.get('https://login.live.com/')
 
 # Вход в акаунт
 email = driver.find_element(By.NAME, "loginfmt").send_keys(credentials.get('login'))
-
 
 
 def dalie():
@@ -89,8 +90,6 @@ for email in mail_list:
 
     print("-----------------Создание самого собщения!-----------------")
     message_for_users = driver.find_element(By.XPATH, '//div[@aria-label="Message body"]').send_keys('Hello! You need to pass trainings. Have a nice day!')
-
-
     print("-----------------Отправка Собщения!-----------------")
     message_send = driver.find_element(By.XPATH, '//button[contains(@title, "Send")]').click()
     print("----------------- Собщение Отправлено!-----------------")
