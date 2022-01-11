@@ -3,15 +3,13 @@ from time import sleep
 
 import pandas as pd
 
-
 from selenium.webdriver.common.by import By
-
 
 from webdriver.driver import driver
 
-x = "--------------------------------------------------------------------------------------------------------------------------------------------------------------"
+x = '--------------------------------------------------------------------------------------------------------------------------------------------------------------'
 
-driver.get("https://login.live.com/")
+driver.get('https://login.live.com/')
 
 # Вход в акаунт
 email = driver.find_element(By.NAME, "loginfmt")
@@ -36,7 +34,7 @@ print("------------------------Вход в акаунт прошёл успеш�
 
 # Переход на почту  и выбор собщения
 
-driver.get("https://outlook.live.com/mail/")
+driver.get('https://outlook.live.com/mail/')
 sleep(4)
 
 
@@ -45,9 +43,7 @@ def download_button():  # Скачка собщения
 
     print("Скачка собщения----------")
     skachivanie = driver.find_element(By.XPATH, '//button[@name = "Download"]').click()
-    print(
-        "------------------------Скачивание  собщения прошло успешно!------------------------"
-    )
+    print("------------------------Скачивание  собщения прошло успешно!------------------------")
     driver.find_element(By.XPATH, '//button[@title = "Close" ]').click()
 
 
@@ -64,35 +60,27 @@ download_button()
 
 driver.find_element(By.XPATH, '//div[@title="Training C"]').click()  # Скачка C
 sleep(3)
-enter_message = driver.find_element(
-    By.XPATH, '//div[@title = "Training C.xlsx"]'
-).click()
+enter_message = driver.find_element(By.XPATH, '//div[@title = "Training C.xlsx"]').click()
 download_button()
 
 # Парсинг собщения из файл
 print("------------------------Парсинг  собщения!------------------------")
 sleep(3)
 list_bad = []
-for f in [
-    os.getcwd() + "/downloaded_files/Training A.xlsx",
-    os.getcwd() + "/downloaded_files/Training B.xlsx",
-    os.getcwd() + "/downloaded_files/Training C.xlsx",
-]:
+for f in [os.getcwd() + '/downloaded_files/Training A.xlsx',
+          os.getcwd() + '/downloaded_files/Training B.xlsx',
+          os.getcwd() + '/downloaded_files/Training C.xlsx']:
     data = pd.read_excel(f)
-    mail = data["Mail"].tolist()
+    mail = data['Mail'].tolist()
     list_bad.extend(mail)
     mail_list = list(set(list_bad))
-print(
-    "------------------------Парсинг  собщения прошёл успешно!------------------------"
-)
+print("------------------------Парсинг  собщения прошёл успешно!------------------------")
 
 sleep(4)
 
 for email in mail_list:
     print("-----------------Создание Собщения!-----------------")
-    open_message_icon = driver.find_element(
-        By.XPATH, '//span[text()="New message"]'
-    ).click()
+    open_message_icon = driver.find_element(By.XPATH, '//span[text()="New message"]').click()
     sleep(5)
     print("-----------------Добавление юзеров!-----------------")
     users_message = driver.find_element(By.XPATH, '//input[@aria-label = "To"]')
@@ -100,22 +88,16 @@ for email in mail_list:
 
     sleep(3)
     print("-----------------СозданиЕ Темы!-----------------")
-    title_message = driver.find_element(
-        By.XPATH, '//input[@aria-label = "Add a subject"]'
-    )
+    title_message = driver.find_element(By.XPATH, '//input[@aria-label = "Add a subject"]')
 
-    title_message.send_keys("You need to pass a training")
+    title_message.send_keys('You need to pass a training')
 
     print("-----------------Создание самого собщения!-----------------")
-    message_for_users = driver.find_element(
-        By.XPATH, '//div[@aria-label="Message body"]'
-    )
-    message_for_users.send_keys("Hello! You need to pass trainings. Have a nice day!")
+    message_for_users = driver.find_element(By.XPATH, '//div[@aria-label="Message body"]')
+    message_for_users.send_keys('Hello! You need to pass trainings. Have a nice day!')
 
     print("-----------------Отправка Собщения!-----------------")
-    message_send = driver.find_element(
-        By.XPATH, '//button[contains(@title, "Send")]'
-    ).click()
+    message_send = driver.find_element(By.XPATH, '//button[contains(@title, "Send")]').click()
     print("----------------- Собщение Отправлено!-----------------")
 
 sleep(5)
