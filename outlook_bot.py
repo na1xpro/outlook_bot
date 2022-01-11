@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 
 from webdriver.driver import driver
 
+x = '--------------------------------------------------------------------------------------------------------------------------------------------------------'
 
 driver.get('https://login.live.com/')
 
