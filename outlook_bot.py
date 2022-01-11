@@ -1,20 +1,16 @@
 import os
 from time import sleep
-
 import pandas as pd
-
-
 from selenium.webdriver.common.by import By
-
-
 from webdriver.driver import driver
+from constants import credentials
 
 
 driver.get('https://login.live.com/')
 
 # Вход в акаунт
-email = driver.find_element(By.NAME, "loginfmt")
-email.send_keys("vivexpro@outlook.com")
+email = driver.find_element(By.NAME, "loginfmt").send_keys(credentials.get('login'))
+
 
 
 def dalie():
@@ -23,8 +19,7 @@ def dalie():
 
 dalie()
 sleep(1)
-password = driver.find_element(By.NAME, "passwd")
-password.send_keys("Vivexpass1")
+password = driver.find_element(By.NAME, "passwd").send_keys(credentials.get('password'))
 sleep(1)
 dalie()
 # Тест строка
@@ -43,7 +38,7 @@ def download_button():  # Скачка собщения
     sleep(5)
 
     print("Скачка собщения----------")
-    skachivanie = driver.find_element(By.XPATH, '//button[@name = "Download"]').click()
+    driver.find_element(By.XPATH, '//button[@name = "Download"]').click()
     print("------------------------Скачивание  собщения прошло успешно!------------------------")
     driver.find_element(By.XPATH, '//button[@title = "Close" ]').click()
 
@@ -84,8 +79,7 @@ for email in mail_list:
     open_message_icon = driver.find_element(By.XPATH, '//span[text()="New message"]').click()
     sleep(5)
     print("-----------------Добавление юзеров!-----------------")
-    users_message = driver.find_element(By.XPATH, '//input[@aria-label = "To"]')
-    users_message.send_keys(email)
+    users_message = driver.find_element(By.XPATH, '//input[@aria-label = "To"]').send_keys(email)
 
     sleep(3)
     print("-----------------СозданиЕ Темы!-----------------")
@@ -94,8 +88,8 @@ for email in mail_list:
     title_message.send_keys('You need to pass a training')
 
     print("-----------------Создание самого собщения!-----------------")
-    message_for_users = driver.find_element(By.XPATH, '//div[@aria-label="Message body"]')
-    message_for_users.send_keys('Hello! You need to pass trainings. Have a nice day!')
+    message_for_users = driver.find_element(By.XPATH, '//div[@aria-label="Message body"]').send_keys('Hello! You need to pass trainings. Have a nice day!')
+
 
     print("-----------------Отправка Собщения!-----------------")
     message_send = driver.find_element(By.XPATH, '//button[contains(@title, "Send")]').click()
