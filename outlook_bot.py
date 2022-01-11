@@ -10,7 +10,7 @@ from constants import credentials
 driver.get('https://login.live.com/')
 
 # Вход в акаунт
-email = driver.find_element(By.NAME, "loginfmt").send_keys(credentials.get('login'))
+driver.find_element(By.NAME, "loginfmt").send_keys(credentials.get['login'])
 
 
 def dalie():
@@ -19,7 +19,7 @@ def dalie():
 
 dalie()
 sleep(1)
-password = driver.find_element(By.NAME, "passwd").send_keys(credentials.get('password'))
+password = driver.find_element(By.NAME, "passwd").send_keys(credentials['password'])
 sleep(1)
 dalie()
 # Тест строка
