@@ -5,7 +5,7 @@
 4. Parsing data from downloaded exel tables. (Email)
 5. Sending messages to specified emails.
 
-#Login data
+# Login data
 
 login = *vivexpro@outlook.com*
 

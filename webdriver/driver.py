@@ -26,3 +26,4 @@ options.add_experimental_option(
 )
 
 driver = webdriver.Chrome(service=driver_service, options=options)
+print()

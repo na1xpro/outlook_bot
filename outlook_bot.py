@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from webdriver.driver import driver
 from constants import credentials
+from loguru import logger
 
 driver.get('https://login.live.com/')
 
@@ -27,7 +28,7 @@ dalie()
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@id="idBtn_Back"]'))).click()
 
 
-print("------------------------Вход в акаунт прошёл успешно!------------------------")
+logger.info("Account authorization successful.")
 
 # Переход на почту  и выбор собщения
 
@@ -35,16 +36,15 @@ driver.get('https://outlook.live.com/mail/')
 
 
 def download_button():  # Скачка собщения
-    print("Скачка собщения----------")
+
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//button[@name = "Download"]'))).click()
-    print("------------------------Скачивание  собщения прошло успешно!------------------------")
+    logger.info("The download was successful!")
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//button[@title = "Close" ]'))).click()
 
 
 # Скач# Скачка А
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training A"]'))).click()
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title = "Training A.xlsx"]'))).click()
-print("------------------------Выбор собщения прошёл успешно!------------------------")
 download_button()
 # Скачка B
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training B"]'))).click()
@@ -60,7 +60,7 @@ WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//d
 download_button()
 
 # Парсинг собщения из файл
-print("------------------------Парсинг  собщения!------------------------")
+logger.info('Parsing a message...')
 
 list_bad = []
 for f in [os.getcwd() + '/downloaded_files/Training A.xlsx',
@@ -70,20 +70,15 @@ for f in [os.getcwd() + '/downloaded_files/Training A.xlsx',
     mail = data['Mail'].tolist()
     list_bad.extend(mail)
     mail_list = list(set(list_bad))
-print("------------------------Парсинг  собщения прошёл успешно!------------------------")
+logger.info('Parsing of the message was successful!')
 for email in mail_list:
-    print("-----------------Создание Собщения!-----------------")
+    logger.info('Create a message!')
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//span[text()="New message"]'))).click()
-    print("-----------------Добавление юзеров!-----------------")
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@aria-label = "To"]'))).send_keys(email)
-
-    print("-----------------СозданиЕ Темы!-----------------")
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@aria-label = "Add a subject"]'))).send_keys('You need to pass a training')
-    print("-----------------Создание самого собщения!-----------------")
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@aria-label="Message body"]'))).send_keys('Hello! You need to pass trainings. Have a nice day!')
-    print("-----------------Отправка Собщения!-----------------")
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//button[contains(@title, "Send")]'))).click()
-    print("----------------- Собщение Отправлено!-----------------")
+    logger.info('Message sent!')
 
 sleep(5)
 driver.close()
