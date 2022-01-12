@@ -10,22 +10,22 @@ from constants import credentials
 driver.get('https://login.live.com/')
 
 # Вход в акаунт
-WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.NAME, "loginfmt"))).send_keys(credentials['login'])
+WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@id="i0116"]'))).send_keys(credentials['login'])
 
 
 def dalie():
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.ID, "idSIButton9"))).click()
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@id="idSIButton9"]'))).click()
 
 
 dalie()
 
-WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.NAME, "passwd"))).send_keys(credentials['password'])
+WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@id="i0118"]'))).send_keys(credentials['password'])
 
 dalie()
 
 
-WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.ID, "KmsiCheckboxField"))).click()
-WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.ID, "idBtn_Back"))).click()
+WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@id="idBtn_Back"]'))).click()
+
 
 print("------------------------Вход в акаунт прошёл успешно!------------------------")
 
