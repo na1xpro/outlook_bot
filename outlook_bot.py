@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from webdriver.driver import driver
 from constants import credentials
+from constants import put_message
 from loguru import logger
 
 driver.get('https://login.live.com/')
@@ -75,8 +76,8 @@ for email in mail_list:
     logger.info('Create a message!')
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//span[text()="New message"]'))).click()
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@aria-label = "To"]'))).send_keys(email)
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@aria-label = "Add a subject"]'))).send_keys('You need to pass a training')
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@aria-label="Message body"]'))).send_keys('Hello! You need to pass trainings. Have a nice day!')
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@aria-label = "Add a subject"]'))).send_keys(put_message['title_message'])
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@aria-label="Message body"]'))).send_keys(put_message['message'])
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//button[contains(@title, "Send")]'))).click()
     logger.info('Message sent!')
 
