@@ -8,6 +8,7 @@ from webdriver.driver import driver
 from constants import credentials
 from constants import put_message
 from loguru import logger
+import glob
 
 driver.get('https://login.live.com/')
 
@@ -62,16 +63,15 @@ download_button()
 
 # Парсинг собщения из файл
 logger.info('Parsing a message...')
-
 list_bad = []
-for f in [os.getcwd() + '/downloaded_files/Training A.xlsx',
-          os.getcwd() + '/downloaded_files/Training B.xlsx',
-          os.getcwd() + '/downloaded_files/Training C.xlsx']:
-    data = pd.read_excel(f)
+os.chdir(os.getcwd() + "/downloaded_files")
+for file in glob.glob("*.xlsx"):
+    data = pd.read_excel(file)
     mail = data['Mail'].tolist()
     list_bad.extend(mail)
     mail_list = list(set(list_bad))
 logger.info('Parsing of the message was successful!')
+
 for email in mail_list:
     logger.info('Create a message!')
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//span[text()="New message"]'))).click()
