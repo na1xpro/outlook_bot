@@ -49,25 +49,21 @@ for filename in files:
 
 
 def download_button():  # Скачка собщения
-
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//button[@name = "Download"]'))).click()
-    logger.info("The download was successful!")
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//button[@title = "Close" ]'))).click()
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@class = "_24WqHp8mfxSp2QIJMkmSrM"]'))).click()
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, "//button[@title = 'More actions']"))).click()
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, "//i[@data-icon-name = 'Download']"))).click()
 
 
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training A"]'))).click()
-WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title = "Training A.xlsx"]'))).click()
+
 download_button()
 
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training B"]'))).click()
-
-WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title = "Training B.xlsx"]'))).click()
 
 download_button()
 
 
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training C"]'))).click()
-WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title = "Training C.xlsx"]'))).click()
 
 download_button()
 
