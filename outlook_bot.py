@@ -5,10 +5,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from webdriver.driver import driver
-from constants import credentials
-from constants import put_message
 from loguru import logger
 import glob
+from constants import credentials
+from constants import put_message
+
 
 driver.get('https://login.live.com/')
 
@@ -36,6 +37,16 @@ logger.info("Account authorization successful.")
 
 driver.get('https://outlook.live.com/mail/')
 
+logger.info('Check for the presence of an existing file in a folder.')
+
+
+# Проверка на наличие файла
+os.chdir(os.getcwd() + "/downloaded_files")
+logger.warning("If it is found it will be deleted!")
+files = glob.glob('*.xlsx')
+for filename in files:
+    os.unlink(filename)
+
 
 def download_button():  # Скачка собщения
 
@@ -44,11 +55,10 @@ def download_button():  # Скачка собщения
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//button[@title = "Close" ]'))).click()
 
 
-# Скач# Скачка А
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training A"]'))).click()
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title = "Training A.xlsx"]'))).click()
 download_button()
-# Скачка B
+
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training B"]'))).click()
 
 WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title = "Training B.xlsx"]'))).click()
@@ -61,10 +71,9 @@ WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//d
 
 download_button()
 
-# Парсинг собщения из файл
 logger.info('Parsing a message...')
 list_bad = []
-os.chdir(os.getcwd() + "/downloaded_files")
+os.chdir(os.getcwd())
 for file in glob.glob("*.xlsx"):
     data = pd.read_excel(file)
     mail = data['Mail'].tolist()
@@ -81,6 +90,6 @@ for email in mail_list:
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//button[contains(@title, "Send")]'))).click()
     logger.info('Message sent!')
 
-sleep(5)
+sleep(3)
 driver.close()
 driver.quit()
