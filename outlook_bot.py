@@ -54,7 +54,7 @@ def download_button():  # Скачка собщения
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, "//i[@data-icon-name = 'Download']"))).click()
 
 
-WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training A"]'))).click()
+WebDriverWait(driver, 13).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training A"]'))).click()
 
 download_button()
 

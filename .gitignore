@@ -1,5 +1,5 @@
-/venv
+venv
 /.idea
 /downloaded_files/*.xlsx
 __pycache__/
-test_build.py
+test_build
