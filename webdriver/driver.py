@@ -4,21 +4,18 @@ from selenium.webdriver.chrome.service import Service
 from sys import platform
 import os
 
-if 'linux' in platform:
-    path_driver = '/webdriver/chromedriver'
-elif platform == 'win32':
-    path_driver = r'\webdriver\chromedriver.exe'
+from constants import os_path
 
-way = os.getcwd() + path_driver
-os.chmod(way, 755)
-driver_service = Service(way)
+path_driver = os.getcwd() + os_path[platform]['path_driver']
+os.chmod(path_driver, 755)
+driver_service = Service(path_driver)
 
 options = Options()
 options.add_argument('--window-size=1400,800')
 options.add_experimental_option(
     'prefs',
     {
-        'download.default_directory': os.getcwd() + r'\downloaded_files',
+        'download.default_directory': os.getcwd() + os_path[platform]['path_download_folder'],
         'download.prompt_for_download': False,
         'safebrowsing.enabled': True,
         'download.directory_upgrade': True,
@@ -26,4 +23,3 @@ options.add_experimental_option(
 )
 
 driver = webdriver.Chrome(service=driver_service, options=options)
-print()

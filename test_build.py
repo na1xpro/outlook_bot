@@ -1,13 +1,7 @@
-
-name = str(input("Enter your name"))
-print(name)
+tes_list = [1,2,3,4,5,6,7,8,9,10]
 
 
-# llist = [1,2,3,4,5,6,7,8,9,10]
-#
-#
-# def test(mas):
-#     return mas*2
-#
-# print(test(llist))
-#
+def hg(j):
+
+print(hg(tes_list))
+
