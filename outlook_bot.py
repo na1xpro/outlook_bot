@@ -4,11 +4,13 @@ import pandas as pd
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+import glob
 from webdriver.driver import driver
 from loguru import logger
-import glob
+from sys import platform
 from constants import credentials
 from constants import put_message
+from constants import os_path
 
 
 driver.get('https://login.live.com/')
@@ -41,11 +43,23 @@ logger.info('Check for the presence of an existing file in a folder.')
 
 
 # Проверка на наличие файла
-os.chdir(os.getcwd() + "/downloaded_files")
-logger.warning("If it is found it will be deleted!")
-files = glob.glob('*.xlsx')
-for filename in files:
-    os.unlink(filename)
+logger.warning('The files in the folder may be deleted!')
+
+
+def clear_files(pathfiles):
+    os.chdir(pathfiles)
+    pathfiles = glob.glob('*.xlsx')
+    for filename in pathfiles:
+        os.unlink(filename)
+
+
+if platform == 'linux':
+    path_lin = os.getcwd() + os_path['linux']['path_download_folder']
+    clear_files(path_lin)
+else:
+    path_lin = os.getcwd() + os_path['win32']['path_download_folder']
+    clear_files(path_lin)
+
 
 
 def download_button():  # Скачка собщения
