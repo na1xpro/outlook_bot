@@ -40,7 +40,6 @@ driver.get('https://outlook.live.com/mail/')
 
 logger.info('Check for the presence of an existing file in a folder.')
 logger.warning('The files in the folder may be deleted!')
-
 pas = os.getcwd() + os_path[platform]['path_download_folder']
 files = glob.glob(pas + r'\*.xlsx')
 for filename in files:
@@ -71,15 +70,17 @@ download_button()
 logger.info('Parsing a message...')
 list_bad = []
 os.chdir(os.getcwd())
-for file in glob.glob("*.xlsx"):
+for file in files:
     data = pd.read_excel(file)
     mail = data['Mail'].tolist()
     list_bad.extend(mail)
     mail_list = list(set(list_bad))
+
+
 logger.info('Parsing of the message was successful!')
 
 for email in mail_list:
-    logger.info('Create a message!')
+    logger.info("Create a message!")
     WebDriverWait(driver, 10).until(
         ec.visibility_of_element_located((By.XPATH, '//span[text()="New message"]'))).click()
     WebDriverWait(driver, 10).until(
