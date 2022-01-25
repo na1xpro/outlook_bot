@@ -69,7 +69,6 @@ download_button()
 
 logger.info('Parsing a message...')
 list_bad = []
-os.chdir(os.getcwd())
 for file in files:
     data = pd.read_excel(file)
     mail = data['Mail'].tolist()
