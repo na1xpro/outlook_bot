@@ -1,13 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from sys import platform
 import os
 from constants import os_path
-
-path_driver = os.getcwd() + os_path[platform]['path_driver']
-os.chmod(path_driver, 755)
-driver_service = Service(path_driver)
+from webdriver_manager.chrome import ChromeDriverManager
 
 options = Options()
 options.add_argument('--window-size=1400,800')
@@ -21,4 +17,4 @@ options.add_experimental_option(
     },
 )
 
-driver = webdriver.Chrome(service=driver_service, options=options)
+driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)

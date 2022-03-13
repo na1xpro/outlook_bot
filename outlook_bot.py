@@ -14,11 +14,11 @@ from constants import os_path
 
 driver.get('https://login.live.com/')
 
+
 def get_giles():
     pas = os.getcwd() + os_path[platform]['path_download_folder']
     files = glob.glob(pas + r'/*.xlsx')
     return files
-
 
 
 # Вход в акаунт
@@ -49,7 +49,8 @@ def checking_files_in_folder(files_list):
 def download_files():
     def download_button():
         WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, '//div[@class = "cviNahf-APKahyilhJ48_ AJDyN2ZDrnPUCMCOmxaaZ"]'))).click()
+            ec.visibility_of_element_located(
+                (By.XPATH, '//div[@class = "cviNahf-APKahyilhJ48_ AJDyN2ZDrnPUCMCOmxaaZ"]'))).click()
         WebDriverWait(driver, 10).until(
             ec.visibility_of_element_located((By.XPATH, "//button[@title = 'More actions']"))).click()
         WebDriverWait(driver, 10).until(
