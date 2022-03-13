@@ -3,7 +3,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from sys import platform
 import os
-
 from constants import os_path
 
 path_driver = os.getcwd() + os_path[platform]['path_driver']

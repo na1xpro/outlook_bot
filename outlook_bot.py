@@ -14,6 +14,12 @@ from constants import os_path
 
 driver.get('https://login.live.com/')
 
+def get_giles():
+    pas = os.getcwd() + os_path[platform]['path_download_folder']
+    files = glob.glob(pas + r'/*.xlsx')
+    return files
+
+
 
 # Вход в акаунт
 def auth():
@@ -33,27 +39,17 @@ def auth():
     driver.get('https://outlook.live.com/mail/')
 
 
-auth()
-
-
-def checking_files_in_folder():
+def checking_files_in_folder(files_list):
     logger.info('Check for the presence of an existing file in a folder.')
     logger.warning('The files in the folder may be deleted!')
-    pas = os.getcwd() + os_path[platform]['path_download_folder']
-    global files
-    files = glob.glob(pas + r'\*.xlsx')
-    for filename in files:
+    for filename in files_list:
         os.unlink(filename)
-    return files
 
 
-checking_files_in_folder()
-
-
-def download_message():
+def download_files():
     def download_button():
         WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, '//div[@class = "_24WqHp8mfxSp2QIJMkmSrM"]'))).click()
+            ec.visibility_of_element_located((By.XPATH, '//div[@class = "cviNahf-APKahyilhJ48_ AJDyN2ZDrnPUCMCOmxaaZ"]'))).click()
         WebDriverWait(driver, 10).until(
             ec.visibility_of_element_located((By.XPATH, "//button[@title = 'More actions']"))).click()
         WebDriverWait(driver, 10).until(
@@ -67,29 +63,22 @@ def download_message():
     download_button()
 
 
-download_message()
-
-
 # Парсинг собщенимя
-def parsing_message():
+def parsing_message(files_list):
     logger.info('Parsing a message...')
     list_bad = []
-    for file in files:
+    for file in files_list:
         data = pd.read_excel(file)
         mail = data['Mail'].tolist()
         list_bad.extend(mail)
-        global mail_list
         mail_list = list(set(list_bad))
         return mail_list
 
     logger.info('Parsing of the message was successful!')
 
 
-parsing_message()
-
-
-def send_message():
-    for email in parsing_message():
+def send_message(mail_list):
+    for email in mail_list:
         logger.info("Create a message!")
         WebDriverWait(driver, 10).until(
             ec.visibility_of_element_located((By.XPATH, '//span[text()="New message"]'))).click()
@@ -106,7 +95,11 @@ def send_message():
         logger.info('Message sent!')
 
 
-send_message()
+auth()
+checking_files_in_folder(get_giles())
+download_files()
+mails = parsing_message(get_giles())
+send_message(mails)
 sleep(3)
 driver.close()
 driver.quit()
