@@ -1,16 +1,23 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from sys import platform
 import os
-from constants import os_path
 from webdriver_manager.chrome import ChromeDriverManager
+
+def platform_func ():
+    if platform == 'win32':
+        plat = r'\downloaded_files'
+    else:
+        plat = r'/downloaded_files'
+    return plat
 
 options = Options()
 options.add_argument('--window-size=1400,800')
 options.add_experimental_option(
     'prefs',
     {
-        'download.default_directory': os.getcwd() + os_path[platform]['path_download_folder'],
+        'download.default_directory': os.getcwd()+platform_func(),
         'download.prompt_for_download': False,
         'safebrowsing.enabled': True,
         'download.directory_upgrade': True,

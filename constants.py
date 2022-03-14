@@ -10,11 +10,9 @@ put_message = {
 
 os_path = {
     'linux': {
-        'path_driver': r'/webdriver/chromedriver',
         'path_download_folder': r'/downloaded_files',
     },
     'win32': {
-        'path_driver': r'\webdriver\chromedriver.exe',
         'path_download_folder': r'\downloaded_files',
     },
 }
