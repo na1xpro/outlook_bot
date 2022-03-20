@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from sys import platform
 import os
 from webdriver_manager.chrome import ChromeDriverManager
@@ -9,7 +8,6 @@ if platform == 'win32':
     plat = r'\downloaded_files'
 else:
     plat = r'/downloaded_files'
-
 
 options = Options()
 options.add_argument('--window-size=1400,800')

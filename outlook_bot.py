@@ -7,10 +7,7 @@ from selenium.webdriver.support import expected_conditions as ec
 import glob
 from webdriver.driver import driver
 from loguru import logger
-from sys import platform
-from constants import credentials
-from constants import put_message
-from constants import os_path
+from constants import credentials, put_message
 from webdriver.driver import plat
 
 driver.get('https://login.live.com/')
@@ -24,7 +21,8 @@ def get_giles():
 
 # Вход в акаунт
 def auth():
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@name = "loginfmt"]'))).send_keys(
+    WebDriverWait(driver, 10).until(
+        ec.visibility_of_element_located((By.XPATH, '//input[@name = "loginfmt"]'))).send_keys(
         credentials['login'])
 
     def dalie():
@@ -32,7 +30,8 @@ def auth():
             ec.visibility_of_element_located((By.XPATH, '//input[@type = "submit"]'))).click()
 
     dalie()
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@name = "passwd"]'))).send_keys(
+    WebDriverWait(driver, 10).until(
+        ec.visibility_of_element_located((By.XPATH, '//input[@name = "passwd"]'))).send_keys(
         credentials['password'])
     dalie()
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@id="idBtn_Back"]'))).click()
