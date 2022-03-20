@@ -11,28 +11,28 @@ from sys import platform
 from constants import credentials
 from constants import put_message
 from constants import os_path
-from webdriver.driver import platform_func
+from webdriver.driver import plat
 
 driver.get('https://login.live.com/')
 
 
 def get_giles():
-    pas = os.getcwd() + platform_func()
+    pas = os.getcwd() + plat
     files = glob.glob(pas + r'/*.xlsx')
     return files
 
 
 # Вход в акаунт
 def auth():
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@id="i0116"]'))).send_keys(
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@name = "loginfmt"]'))).send_keys(
         credentials['login'])
 
     def dalie():
         WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, '//input[@id="idSIButton9"]'))).click()
+            ec.visibility_of_element_located((By.XPATH, '//input[@type = "submit"]'))).click()
 
     dalie()
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@id="i0118"]'))).send_keys(
+    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@name = "passwd"]'))).send_keys(
         credentials['password'])
     dalie()
     WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@id="idBtn_Back"]'))).click()
@@ -51,7 +51,7 @@ def download_files():
     def download_button():
         WebDriverWait(driver, 10).until(
             ec.visibility_of_element_located(
-                (By.XPATH, '//div[@class = "SM1IHSPPRVYN1aU3B5rS"]'))).click()
+                (By.XPATH, '//div[@title = "Select all messages"]'))).click()
         WebDriverWait(driver, 10).until(
             ec.visibility_of_element_located((By.XPATH, "//button[@title = 'More actions']"))).click()
         WebDriverWait(driver, 10).until(
