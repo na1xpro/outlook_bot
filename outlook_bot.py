@@ -11,12 +11,13 @@ from sys import platform
 from constants import credentials
 from constants import put_message
 from constants import os_path
+from webdriver.driver import platform_func
 
 driver.get('https://login.live.com/')
 
 
 def get_giles():
-    pas = os.getcwd() + os_path[platform]['path_download_folder']
+    pas = os.getcwd() + platform_func()
     files = glob.glob(pas + r'/*.xlsx')
     return files
 
@@ -50,7 +51,7 @@ def download_files():
     def download_button():
         WebDriverWait(driver, 10).until(
             ec.visibility_of_element_located(
-                (By.XPATH, '//div[@class = "cviNahf-APKahyilhJ48_ AJDyN2ZDrnPUCMCOmxaaZ"]'))).click()
+                (By.XPATH, '//div[@class = "SM1IHSPPRVYN1aU3B5rS"]'))).click()
         WebDriverWait(driver, 10).until(
             ec.visibility_of_element_located((By.XPATH, "//button[@title = 'More actions']"))).click()
         WebDriverWait(driver, 10).until(

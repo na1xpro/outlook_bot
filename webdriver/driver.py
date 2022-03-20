@@ -12,6 +12,7 @@ def platform_func ():
         plat = r'/downloaded_files'
     return plat
 
+
 options = Options()
 options.add_argument('--window-size=1400,800')
 options.add_experimental_option(
