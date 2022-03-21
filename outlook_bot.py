@@ -12,29 +12,28 @@ from webdriver.driver import plat
 
 driver.get('https://login.live.com/')
 
-
+#  Хуя тут э смалыки 🙃
 def get_giles():
     pas = os.getcwd() + plat
     files = glob.glob(pas + r'/*.xlsx')
     return files
 
 
+def find_element(xpath):
+    return WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, xpath)))
+
+
 # Вход в акаунт
 def auth():
-    WebDriverWait(driver, 10).until(
-        ec.visibility_of_element_located((By.XPATH, '//input[@name = "loginfmt"]'))).send_keys(
-        credentials['login'])
+    find_element('//input[@name = "loginfmt"]').send_keys(credentials['login'])
 
     def dalie():
-        WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, '//input[@type = "submit"]'))).click()
+        find_element('//input[@type = "submit"]').click()
 
     dalie()
-    WebDriverWait(driver, 10).until(
-        ec.visibility_of_element_located((By.XPATH, '//input[@name = "passwd"]'))).send_keys(
-        credentials['password'])
+    find_element('//input[@name = "passwd"]').send_keys(credentials['password'])
     dalie()
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//input[@id="idBtn_Back"]'))).click()
+    find_element('//input[@id="idBtn_Back"]').click()
     logger.info("Account authorization successful.")
     driver.get('https://outlook.live.com/mail/')
 
@@ -49,21 +48,17 @@ def checking_files_in_folder(files_list):
 def download_files():
     def download_button():
         sleep(1)
-        WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located(
-                (By.XPATH, '//div[@title = "Select all messages"]'))).click()
+        find_element('//div[@title = "Select all messages"]').click()
         sleep(1)
-        WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, "//button[@title = 'More actions']"))).click()
+        find_element("//button[@title = 'More actions']").click()
         sleep(1)
-        WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, "//i[@data-icon-name = 'Download']"))).click()
+        find_element("//i[@data-icon-name = 'Download']").click()
 
-    WebDriverWait(driver, 13).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training A"]'))).click()
+    find_element('//div[@title="Training A"]').click()
     download_button()
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training B"]'))).click()
+    find_element('//div[@title="Training B"]').click()
     download_button()
-    WebDriverWait(driver, 10).until(ec.visibility_of_element_located((By.XPATH, '//div[@title="Training C"]'))).click()
+    find_element('//div[@title="Training C"]').click()
     download_button()
 
 
@@ -84,18 +79,11 @@ def parsing_message(files_list):
 def send_message(mail_list):
     for email in mail_list:
         logger.info("Create a message!")
-        WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, '//span[text()="New message"]'))).click()
-        WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, '//input[@aria-label = "To"]'))).send_keys(email)
-        WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, '//input[@aria-label = "Add a subject"]'))).send_keys(
-            put_message['title_message'])
-        WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, '//div[@aria-label="Message body"]'))).send_keys(
-            put_message['message'])
-        WebDriverWait(driver, 10).until(
-            ec.visibility_of_element_located((By.XPATH, '//button[contains(@title, "Send")]'))).click()
+        find_element('//span[text()="New message"]').click()
+        find_element('//input[@aria-label = "To"]').send_keys(email)
+        find_element('//input[@aria-label = "Add a subject"]').send_keys(put_message['title_message'])
+        find_element('//div[@aria-label="Message body"]').send_keys(put_message['message'])
+        find_element('//button[contains(@title, "Send")]').click()
         logger.info('Message sent!')
 
 
