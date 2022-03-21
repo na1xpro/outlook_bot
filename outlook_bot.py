@@ -48,11 +48,14 @@ def checking_files_in_folder(files_list):
 
 def download_files():
     def download_button():
+        sleep(1)
         WebDriverWait(driver, 10).until(
             ec.visibility_of_element_located(
                 (By.XPATH, '//div[@title = "Select all messages"]'))).click()
+        sleep(1)
         WebDriverWait(driver, 10).until(
             ec.visibility_of_element_located((By.XPATH, "//button[@title = 'More actions']"))).click()
+        sleep(1)
         WebDriverWait(driver, 10).until(
             ec.visibility_of_element_located((By.XPATH, "//i[@data-icon-name = 'Download']"))).click()
 
