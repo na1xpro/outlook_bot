@@ -12,6 +12,7 @@ from webdriver.driver import plat
 
 driver.get('https://login.live.com/')
 
+
 #  Хуя тут э смалыки 🙃
 def get_giles():
     pas = os.getcwd() + plat
@@ -26,13 +27,10 @@ def find_element(xpath):
 # Вход в акаунт
 def auth():
     find_element('//input[@name = "loginfmt"]').send_keys(credentials['login'])
-
-    def dalie():
-        find_element('//input[@type = "submit"]').click()
-
-    dalie()
+    submit = '//input[@type = "submit"]'
+    find_element(submit).click()
     find_element('//input[@name = "passwd"]').send_keys(credentials['password'])
-    dalie()
+    find_element(submit).click()
     find_element('//input[@id="idBtn_Back"]').click()
     logger.info("Account authorization successful.")
     driver.get('https://outlook.live.com/mail/')
@@ -54,12 +52,10 @@ def download_files():
         sleep(1)
         find_element("//i[@data-icon-name = 'Download']").click()
 
-    find_element('//div[@title="Training A"]').click()
-    download_button()
-    find_element('//div[@title="Training B"]').click()
-    download_button()
-    find_element('//div[@title="Training C"]').click()
-    download_button()
+    folders_file = ("Training A", "Training B", "Training C")
+    for i in folders_file:
+        find_element('//div[@title=' + '"' + i + '"' + ']').click()
+        download_button()
 
 
 # Парсинг собщенимя
