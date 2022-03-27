@@ -18,9 +18,8 @@ class Bot:
     def __init__(self, plat, driver, ):
         self.plat = plat
         self.driver = driver
-        self.get_giles()
 
-    def get_giles(self):
+    def get_files(self):
         pas = os.getcwd() + self.plat
         files = glob.glob(pas + r'/*.xlsx')
         return files
@@ -42,7 +41,7 @@ class Bot:
     def checking_files_in_folder(self):
         logger.info('Check for the presence of an existing file in a folder.')
         logger.warning('The files in the folder may be deleted!')
-        for filename in files_list:
+        for filename in self.get_files():
             os.unlink(filename)
 
     def download_files(self):
@@ -58,10 +57,10 @@ class Bot:
             self.find_element("//i[@data-icon-name = 'Download']").click()
 
     #    Парсинг собщенимя
-    def parsing_message(self, files_list):
+    def parsing_message(self, ):
         logger.info('Parsing a message...')
         list_bad = []
-        for file in files_list:
+        for file in self.get_files():
             data = pd.read_excel(file)
             mail = data['Mail'].tolist()
             list_bad.extend(mail)
@@ -70,8 +69,8 @@ class Bot:
 
         logger.info('Parsing of the message was successful!')
 
-    def send_message(self, mail_list):
-        for email in mail_list:
+    def send_message(self):
+        for email in self.parsing_message():
             logger.info("Create a message!")
             self.find_element('//span[text()="New message"]').click()
             self.find_element('//input[@aria-label = "To"]').send_keys(email)
@@ -85,12 +84,8 @@ bot = Bot(plat, driver, )
 bot.auth()
 bot.checking_files_in_folder()
 bot.download_files()
+bot.parsing_message()
+bot.send_message()
 
-# auth()
-# checking_files_in_folder(get_giles())
-# download_files()
-# mails = parsing_message(get_giles())
-# send_message(mails)
-# sleep(3)
-# driver.close()
-# driver.quit()
+driver.close()
+driver.quit()
