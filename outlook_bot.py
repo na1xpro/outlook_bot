@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as ec
 import glob
 from webdriver.driver import driver
 from loguru import logger
-from constants import credentials, put_message
+from bot.constants import credentials, put_message
 from webdriver.driver import plat
 
 driver.get('https://login.live.com/')
@@ -15,7 +15,7 @@ driver.get('https://login.live.com/')
 
 #  Хуя тут э смалыки 🙃
 class Bot:
-    def __init__(self, plat, driver, ):
+    def __init__(self, plat, driver ):
         self.plat = plat
         self.driver = driver
 
@@ -57,7 +57,7 @@ class Bot:
             self.find_element("//i[@data-icon-name = 'Download']").click()
 
     #    Парсинг собщенимя
-    def parsing_message(self, ):
+    def parsing_message(self):
         logger.info('Parsing a message...')
         list_bad = []
         for file in self.get_files():
@@ -80,12 +80,3 @@ class Bot:
             logger.info('Message sent!')
 
 
-bot = Bot(plat, driver, )
-bot.auth()
-bot.checking_files_in_folder()
-bot.download_files()
-bot.parsing_message()
-bot.send_message()
-
-driver.close()
-driver.quit()
