@@ -29,3 +29,8 @@ folder = **/downloaded_files**
 **In this project, there is a flake8 check.**
 
 _In the [.pre-commit-config file](), you can add plugins that will be used in code review._
+
+
+#Platform
+
+**The bot is cross-platform and can run on any type of OS.**
